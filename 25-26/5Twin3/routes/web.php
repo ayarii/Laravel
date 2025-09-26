@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 #basic route
-Route::get('/home', function () {
+Route::get('/coucou', function () {
     return 'Bienvenue sur la page d’accueil';
 });
 #paramétré
@@ -25,7 +25,7 @@ Route::get('freegaza',function (){
 
 #interface blade simple
 Route::get('/contact', function () {
-    return view('contact'); // ↔ resources/views/home.blade.php
+    return view('contact'); //
 });
 
 # php +route
@@ -33,11 +33,12 @@ Route::get('/dashboard', [ProductController::class, 'index']);
 
 Route::get('/addProduct',[ProductController::class,'create']);
 
-
-
-
 Route::get('/advisor', [AdvisorController::class, 'show'])->name('advisor');
 
+#Middleware
+Route::get('/cours/', [\App\Http\Controllers\CoursController::class, 'index'])
+    ->middleware('check-age');
+Route::get('/coucou',[CategoryController::class,'home'])->name('hello');
+Route::get('/allCours',[\App\Http\Controllers\CoursController::class,'index'])->name('listCours');
+Route::get('/cours/{id}', [\App\Http\Controllers\CoursController::class, 'show'])->name('cours.show');
 
-
-Route::get('/home',[CategoryController::class,'home'])->name('hello');
