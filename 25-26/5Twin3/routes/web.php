@@ -42,3 +42,16 @@ Route::get('/coucou',[CategoryController::class,'home'])->name('hello');
 Route::get('/allCours',[\App\Http\Controllers\CoursController::class,'index'])->name('listCours');
 Route::get('/cours/{id}', [\App\Http\Controllers\CoursController::class, 'show'])->name('cours.show');
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/todo', function () {
+    return view('todo');
+})->name('dashboard_toDo');
