@@ -28,8 +28,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'username' => fake()->unique()->userName(), // ✅ ajout important
+            'email' => 'user' . Str::random(5) . '@example.com', // <- email unique
             'email_verified_at' => now(),
+
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,

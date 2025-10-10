@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('username')->unique();
-            $table->string('phone')->unique();
+          #  $table->string('phone')->unique();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
 
@@ -38,6 +39,11 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('current_team_id')->nullable();
+
         });
     }
 
